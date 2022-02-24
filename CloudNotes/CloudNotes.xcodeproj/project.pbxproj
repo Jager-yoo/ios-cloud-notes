@@ -28,6 +28,8 @@
 		C994CB8D27C4D4F000EEA5E9 /* DropboxFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C994CB8C27C4D4F000EEA5E9 /* DropboxFile.swift */; };
 		C994CB8F27C4D70E00EEA5E9 /* String+splitedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C994CB8E27C4D70E00EEA5E9 /* String+splitedText.swift */; };
 		C9AA78EB27C3B68C00F3B307 /* DropboxManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AA78EA27C3B68C00F3B307 /* DropboxManager.swift */; };
+		C9AFC78627C74F4000BD4847 /* MemoSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AFC78527C74F4000BD4847 /* MemoSearchViewController.swift */; };
+		C9AFC78827C753AE00BD4847 /* SearchResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AFC78727C753AE00BD4847 /* SearchResultTableViewController.swift */; };
 		C9B3074A27BCE96E00C275A8 /* Character+lineBreak.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B3074927BCE96E00C275A8 /* Character+lineBreak.swift */; };
 		C9B3074C27BCEBFE00C275A8 /* String+customString.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B3074B27BCEBFE00C275A8 /* String+customString.swift */; };
 		C9B3074E27BCEC1900C275A8 /* IndexPath+zero.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B3074D27BCEC1900C275A8 /* IndexPath+zero.swift */; };
@@ -91,6 +93,8 @@
 		C994CB8C27C4D4F000EEA5E9 /* DropboxFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropboxFile.swift; sourceTree = "<group>"; };
 		C994CB8E27C4D70E00EEA5E9 /* String+splitedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+splitedText.swift"; sourceTree = "<group>"; };
 		C9AA78EA27C3B68C00F3B307 /* DropboxManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropboxManager.swift; sourceTree = "<group>"; };
+		C9AFC78527C74F4000BD4847 /* MemoSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoSearchViewController.swift; sourceTree = "<group>"; };
+		C9AFC78727C753AE00BD4847 /* SearchResultTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewController.swift; sourceTree = "<group>"; };
 		C9B3074927BCE96E00C275A8 /* Character+lineBreak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Character+lineBreak.swift"; sourceTree = "<group>"; };
 		C9B3074B27BCEBFE00C275A8 /* String+customString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+customString.swift"; sourceTree = "<group>"; };
 		C9B3074D27BCEC1900C275A8 /* IndexPath+zero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IndexPath+zero.swift"; sourceTree = "<group>"; };
@@ -161,6 +165,8 @@
 			children = (
 				C9F4255127B20BE900BC4BF0 /* MemoSplitViewController.swift */,
 				C13E937E27B212D200446D79 /* MemoTableViewController.swift */,
+				C9AFC78527C74F4000BD4847 /* MemoSearchViewController.swift */,
+				C9AFC78727C753AE00BD4847 /* SearchResultTableViewController.swift */,
 				C13E938027B2179B00446D79 /* MemoDetailViewController.swift */,
 			);
 			path = Controller;
@@ -545,11 +551,13 @@
 			files = (
 				C9F4255C27B24F2200BC4BF0 /* UITableView+dequeueReusableCell.swift in Sources */,
 				C9F4255E27B2595F00BC4BF0 /* TimeInterval+dateString.swift in Sources */,
+				C9AFC78627C74F4000BD4847 /* MemoSearchViewController.swift in Sources */,
 				C9F4255227B20BE900BC4BF0 /* MemoSplitViewController.swift in Sources */,
 				C9B3074A27BCE96E00C275A8 /* Character+lineBreak.swift in Sources */,
 				C994047127C50D400015AFCE /* UserDefaultsKey.swift in Sources */,
 				C9AA78EB27C3B68C00F3B307 /* DropboxManager.swift in Sources */,
 				C94DE44527BB79ED0002875C /* AppDelegate.swift in Sources */,
+				C9AFC78827C753AE00BD4847 /* SearchResultTableViewController.swift in Sources */,
 				C9B3075227BCF00900C275A8 /* SystemIcon.swift in Sources */,
 				C7481C7025BBCF3900B9CA55 /* SceneDelegate.swift in Sources */,
 				C994047327C50F210015AFCE /* AlertMessage.swift in Sources */,

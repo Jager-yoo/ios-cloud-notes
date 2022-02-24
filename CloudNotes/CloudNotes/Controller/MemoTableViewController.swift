@@ -12,6 +12,8 @@ class MemoTableViewController: UITableViewController {
     private let initialIndexPath: IndexPath = .zero
     lazy var selectedIndexPath = initialIndexPath
     private weak var delegate: MemoManageable?
+    private let searchResultController = SearchResultTableViewController(style: .insetGrouped)
+    private lazy var searchController = MemoSearchViewController(resultVC: searchResultController)
     
     private var isSplitViewCollapsed: Bool? {
         return self.splitViewController?.isCollapsed
@@ -21,6 +23,7 @@ class MemoTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.register(cellWithClass: MemoTableViewCell.self)
         configureNavigationBar()
+        configSearchController()
         configureTableView()
     }
         
@@ -31,6 +34,13 @@ class MemoTableViewController: UITableViewController {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    private func configSearchController() {
+        searchController.searchResultsUpdater = self
+        searchResultController.tableView.delegate = self
+        self.navigationItem.searchController = searchController        
+        self.navigationItem.hidesSearchBarWhenScrolling = false
     }
     
     private func configureNavigationBar() {
@@ -59,6 +69,7 @@ class MemoTableViewController: UITableViewController {
             tableView.delegate?.tableView?(tableView, didSelectRowAt: initialIndexPath)
         }
         tableView.separatorInset = UIEdgeInsets.zero
+        tableView.allowsSelectionDuringEditing = true
     }
 
     @objc private func addEmptyMemo() {
@@ -66,7 +77,10 @@ class MemoTableViewController: UITableViewController {
         tableView.insertRows(at: [initialIndexPath], with: .fade)
         tableView.scrollToRow(at: initialIndexPath, at: .bottom, animated: true)
         tableView.selectRow(at: initialIndexPath, animated: true, scrollPosition: .none)
-        delegate?.showSecondaryView(of: initialIndexPath)
+        guard let data = delegate?.fetch(at: initialIndexPath) else {
+            return
+        }
+        delegate?.showSecondaryView(of: initialIndexPath, with: data)
         tableView.isEditing = false
     }
     
@@ -123,8 +137,20 @@ extension MemoTableViewController {
 
 extension MemoTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("🦎 \(indexPath)")
+        var selectedMemo: Memo!
+        if tableView === self.tableView {
+            selectedMemo = delegate?.fetch(at: indexPath)
+        } else {
+            selectedMemo = searchResultController.filteredMemo[indexPath.row]
+        }
         selectedIndexPath = indexPath
-        delegate?.showSecondaryView(of: indexPath)
+        delegate?.showSecondaryView(of: indexPath, with: selectedMemo)
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableView.selectRow(at: selectedIndexPath, animated: false, scrollPosition: .none)
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -145,5 +171,33 @@ extension MemoTableViewController {
         let swipeActions = UISwipeActionsConfiguration(actions: [deleteAction, shareAction])
         swipeActions.performsFirstActionWithFullSwipe = false
         return swipeActions
+    }
+}
+
+extension MemoTableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        var searchResult = Set<Memo>()
+        guard let searchKeyword = searchController.searchBar.text else {
+            return
+        }
+        
+        let strippedKeyword = searchKeyword.trimmingCharacters(in: CharacterSet.whitespaces)
+        let searchKeywords = strippedKeyword.components(separatedBy: " ")
+        searchKeywords.forEach { keyword in
+            guard let result = delegate?.search(with: keyword), !result.isEmpty else {
+                return
+            }
+            result.forEach {
+                searchResult.insert($0)
+            }
+        }
+        
+        if let searchResultController = searchController.searchResultsController as? SearchResultTableViewController {
+            searchResultController.filteredMemo = Array(searchResult)
+            searchResultController.tableView.reloadData()
+            
+            let resultString = searchResultController.filteredMemo.isEmpty ? "메모 없음" : ""
+            searchResultController.configResultLabel(with: resultString)
+        }
     }
 }

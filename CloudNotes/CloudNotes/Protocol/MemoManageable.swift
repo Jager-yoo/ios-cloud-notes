@@ -18,6 +18,7 @@ protocol CoreDataManageable: AnyObject {
     func fetch(at indexPath: IndexPath) -> Memo
     func delete(at indexPath: IndexPath)
     func update(at indexPath: IndexPath, title: String, body: String)
+    func search(with keyword: String) -> [Memo]
 }
 
 protocol DropboxManageable: AnyObject {
@@ -27,7 +28,7 @@ protocol DropboxManageable: AnyObject {
 
 protocol MemoSplitViewManageable: AnyObject {
     func showPrimaryView()
-    func showSecondaryView(of indexPath: IndexPath)
+    func showSecondaryView(of indexPath: IndexPath, with memo: Memo)
     func presentConnectResultAlert(type: AlertMessage)
     func presentShareActivity(at indexPath: IndexPath)
     func presentDeleteAlert(at indexPath: IndexPath)

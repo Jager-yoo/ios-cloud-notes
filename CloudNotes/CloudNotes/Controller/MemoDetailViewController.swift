@@ -22,6 +22,7 @@ private enum TextAttribute {
 class MemoDetailViewController: UIViewController {
     private var currentIndexPath: IndexPath = .zero
     private weak var delegate: MemoManageable?
+    private var currentMemoId: UUID?
     
     private let memoTextView: UITextView = {
         let textView = UITextView()
@@ -44,6 +45,11 @@ class MemoDetailViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    func updateCurrentInfo(indexPath: IndexPath, id: UUID) {
+        currentIndexPath = indexPath
+        currentMemoId = id
     }
     
     func updateCurrentIndexPath(with indexPath: IndexPath) {

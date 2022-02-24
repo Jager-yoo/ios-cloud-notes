@@ -56,6 +56,13 @@ final class CoreDataManager {
         saveContext()
     }
     
+    func search(with keyword: String) -> [Memo] {
+        let request = Memo.fetchRequest()
+        request.predicate = NSPredicate(format: "title CONTAINS %@", keyword)
+        let searchResult = try? context.fetch(request)
+        return searchResult ?? []
+    }
+    
     private func saveContext() {
         do {
             try context.save()
