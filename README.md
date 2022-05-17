@@ -8,7 +8,7 @@ https://user-images.githubusercontent.com/71127966/160789726-37672a1c-b9d1-4e88-
 
 # ✨ 핵심 키워드
 
-- MVC, Delegation 패턴
+- `UIKit with MVC 패턴` (iOS 14.3+)
 - Core Data
 - UISplitViewController
 - UISearchController
